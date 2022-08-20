@@ -2,9 +2,10 @@ import Head from "next/head";
 import Map from "../components/Map";
 import styles from "../styles/Home.module.scss";
 
-import { Compass, IconMenu, MapSearch } from "../components/Icons";
+import { IconCompass, IconMenu, IconMapSearch } from "../components/Icons";
 
 import TopBar from "../components/TopBar";
+import Button from "../components/Button";
 
 export default function Home() {
   return (
@@ -15,7 +16,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Map />
-      <TopBar title="Pasand Bagh, Karim Ganj">Hello, World!</TopBar>
+      <TopBar
+        leading={
+          <Button type="transparent">
+            <IconMenu className="w-4 h-4 icon" />
+          </Button>
+        }
+        title="Pasand Bagh, Karim Ganj"
+      >
+        <Button type="translucent">
+          <IconMapSearch className="w-4 h-4 icon" />
+        </Button>
+        <Button type="translucent">
+          <IconCompass className="w-4 h-4 icon" />
+        </Button>
+      </TopBar>
     </div>
   );
 }

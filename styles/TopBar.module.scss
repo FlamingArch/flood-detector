@@ -1,11 +1,11 @@
 .topbar {
   background: linear-gradient(
     180deg,
-    rgba(var(--background), 0.8) 0%,
+    rgba(var(--background), 1) 0%,
     rgba(var(--background), 0) 100%
   );
   color: rgb(var(--foreground));
-  @apply p-6 pt-12 gap-4 flex flex-row w-screen place-items-center;
+  @apply p-6 gap-4 flex flex-row w-screen place-items-center;
 
   .title {
     color: rgb(var(--foreground));

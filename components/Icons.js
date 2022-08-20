@@ -1,5 +1,3 @@
-import React from "react";
-
 export function IconMenu({ className }) {
   return (
     <svg
@@ -18,7 +16,7 @@ export function IconMenu({ className }) {
   );
 }
 
-export function Compass({ className }) {
+export function IconCompass({ className }) {
   return (
     <svg
       className={className}
@@ -36,7 +34,7 @@ export function Compass({ className }) {
   );
 }
 
-export function MapSearch({ className }) {
+export function IconMapSearch({ className }) {
   return (
     <svg
       className={className}
