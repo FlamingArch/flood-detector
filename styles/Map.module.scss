@@ -1,0 +1,9 @@
+.map {
+  background: url(../public/Map.light.png);
+}
+
+@media (prefers-color-scheme: dark) {
+  .map {
+    background: url(../public/Map.dark.png);
+  }
+}
