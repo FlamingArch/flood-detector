@@ -4,8 +4,8 @@ export default function Page({ children, head, topbar }) {
   return (
     <div className={styles.container}>
       {head}
-      {topbar}
       {children}
+      {topbar}
     </div>
   );
 }
