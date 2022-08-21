@@ -7,20 +7,11 @@ export default function Map() {
 
   return (
     <Image
+      // src={`https://source.unsplash.com/random/2300x1000`}
       src={`/../public/Map.${theme}.png`}
       className="-z-50"
       layout="fill"
       alt=""
     />
   );
-
-  // return (
-  //   <Image
-  //     style={{}}
-  //     src={`https://source.unsplash.com/random/2300x1000`}
-  //     className="-z-50"
-  //     layout="fill"
-  //     alt=""
-  //   />
-  // );
 }

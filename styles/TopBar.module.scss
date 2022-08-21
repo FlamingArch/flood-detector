@@ -9,6 +9,7 @@
 
   .title {
     color: rgb(var(--foreground));
-    @apply font-bold flex-grow;
+    font-size: 1.2rem;
+    @apply font-medium flex-grow;
   }
 }

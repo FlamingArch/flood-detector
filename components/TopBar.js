@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "../styles/TopBar.module.scss";
 
 function TopBar({ leading, title, children }) {

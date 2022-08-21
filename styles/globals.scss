@@ -29,3 +29,17 @@
     color: rgb(var(--foreground));
   }
 }
+
+.icon.reverse {
+  width: 1rem;
+  height: 1rem;
+  svg,
+  path {
+    fill: rgb(var(--background));
+    color: rgb(var(--background));
+  }
+}
+
+.bg-foreground {
+  background-color: rgb(var(--foreground));
+}

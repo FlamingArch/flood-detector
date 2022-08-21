@@ -1,36 +1,28 @@
-import Head from "next/head";
-import Map from "../components/Map";
-import styles from "../styles/Home.module.scss";
+// import Map from "../components/Map";
+import {
+  Map,
+  Page,
+  BottomSheet,
+  ListItem,
+  LeadingRoadIcon,
+} from "../components";
+import { AppHead, AppTopBar } from "../components/fragments";
 
-import { IconCompass, IconMenu, IconMapSearch } from "../components/Icons";
-
-import TopBar from "../components/TopBar";
-import Button from "../components/Button";
+import { IconArrow } from "../components/Icons";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Flood Detector</title>
-        <meta name="description" content="SIH Final Project - Flood Detector" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Page head={<AppHead />} topbar={<AppTopBar />}>
       <Map />
-      <TopBar
-        leading={
-          <Button type="transparent">
-            <IconMenu className="w-4 h-4 icon" />
-          </Button>
-        }
-        title="Pasand Bagh, Karim Ganj"
-      >
-        <Button type="translucent">
-          <IconMapSearch className="w-4 h-4 icon" />
-        </Button>
-        <Button type="translucent">
-          <IconCompass className="w-4 h-4 icon" />
-        </Button>
-      </TopBar>
-    </div>
+      <BottomSheet title="Risky Roads Nearby">
+        <ListItem
+          leading={LeadingRoadIcon()}
+          trailing={<IconArrow className="icon" />}
+          title="Pasand Bagh Road"
+        >
+          <p>Expected Flooding</p>
+        </ListItem>
+      </BottomSheet>
+    </Page>
   );
 }
