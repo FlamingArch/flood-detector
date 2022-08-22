@@ -5,52 +5,65 @@ import {
   BottomSheet,
   ListItem,
   LeadingRoadIcon,
-  TopBar,
-  Button,
 } from "../components";
 import { AppHead, AppTopBar } from "../components/fragments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconArrow, IconBack } from "../components/Icons";
-import { sample } from "lodash";
 import DetailsPage from "./DetailsPage";
+import axios from "axios";
+import { AnimatePresence } from "framer-motion";
+
+const sampleData = [
+  {
+    label: "Flood Chances",
+    value: "Yes",
+  },
+  {
+    label: "Latitude",
+    value: "23.21213",
+  },
+  {
+    label: "Longitude",
+    value: "32.21213",
+  },
+  {
+    label: "Sea Level",
+    value: "546 Meters",
+  },
+  {
+    label: "Temperature",
+    value: "40.5 ºC",
+  },
+  {
+    label: "Humidity",
+    value: "23.32%",
+  },
+  {
+    label: "Weather Conditions",
+    value: "Cloudy / Drizzling",
+  },
+  {
+    label: "Pressure",
+    value: "21.2432",
+  },
+];
 
 export default function Home() {
   const [secondaryVisible, setSecondaryVisible] = useState(false);
 
-  const sampleData = [
-    {
-      label: "Flood Chances",
-      value: "Yes",
-    },
-    {
-      label: "Latitude",
-      value: "23.21213",
-    },
-    {
-      label: "Longitude",
-      value: "32.21213",
-    },
-    {
-      label: "Sea Level",
-      value: "546 Meters",
-    },
-    {
-      label: "Temperature",
-      value: "40.5 ºC",
-    },
-    {
-      label: "Humidity",
-      value: "23.32%",
-    },
-    {
-      label: "Weather Conditions",
-      value: "Cloudy / Drizzling",
-    },
-  ];
+  useEffect(() => {
+    let data;
+    axios
+      .get("")
+      .then((e) => {
+        data = e;
+      })
+      .catch((e) => {});
+  }, []);
 
   return (
     <>
-      <Page head={<AppHead />} topbar={!secondaryVisible && <AppTopBar />}>
+      <Page head={<AppHead />} topbar={<AppTopBar />}>
         <Map />
         <BottomSheet title="Risky Roads Nearby">
           <ListItem
@@ -63,25 +76,15 @@ export default function Home() {
           </ListItem>
         </BottomSheet>
       </Page>
-      {secondaryVisible && (
-        <div
-          animation={{ opacity: [0, 100] }}
-          className="absolute top-0 left-0 w-screen h-screen pt-32 bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60 backdrop-filter backdrop-blur-xl"
-        >
-          <TopBar
-            title="NH-24 (Kanpur Road)"
-            leading={
-              <Button
-                type="translucent"
-                onClick={() => setSecondaryVisible(false)}
-              >
-                <IconBack className="icon" />
-              </Button>
-            }
+
+      <AnimatePresence>
+        {secondaryVisible && (
+          <DetailsPage
+            obj={sampleData}
+            closeFunction={() => setSecondaryVisible(false)}
           />
-          <DetailsPage obj={sampleData} />
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }
