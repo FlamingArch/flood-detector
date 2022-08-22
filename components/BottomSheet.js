@@ -8,8 +8,9 @@ export default function BottomSheet({ children, title }) {
   const containerAlignments =
     " absolute bottom-0 flex flex-col w-screen gap-4 p-6 almostlg:transition-all lg:transition-all lg:w-96 lg:mx-6";
 
-  const [top, setTop] = useState(0);
+  const [top, setTop] = useState(1000);
   const [hidden, setHidden] = useState(true);
+  const [window, setWindow] = useState({ innerHeight: 100 });
 
   let dragging = false;
   let setDragging = (val) => (dragging = val);
@@ -17,19 +18,24 @@ export default function BottomSheet({ children, title }) {
   var defaultHeight = true;
 
   useEffect(() => {
-    setTop((window.innerHeight * 2) / 3);
+    setWindow(global.window);
+    setTop((global.window.innerHeight * 2) / 3);
     setHidden(false);
-    window.onresize = (e) => {
+    global.window.onresize = (e) => {
       if (defaultHeight) {
-        setTop((window.innerHeight * 2) / 3);
+        setTop((global.window.innerHeight * 2) / 3);
       }
     };
-  }, []);
+  }, [defaultHeight]);
 
   return (
     <div
       className={containerAlignments + containerEffects + containerStyles}
-      style={{ top: `${top}px` }}
+      style={{
+        top: `${
+          top > window.innerHeight * 0.1 ? top : window.innerHeight * 0.1 ?? 128
+        }px`,
+      }}
     >
       <div
         style={{ height: "2px" }}

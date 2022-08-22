@@ -1,4 +1,7 @@
-// import Map from "../components/Map";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import axios from "axios";
+
 import {
   Map,
   Page,
@@ -7,11 +10,9 @@ import {
   LeadingRoadIcon,
 } from "../components";
 import { AppHead, AppTopBar } from "../components/fragments";
-import { useEffect, useState } from "react";
-import { IconArrow, IconBack } from "../components/Icons";
-import DetailsPage from "./DetailsPage";
-import axios from "axios";
-import { AnimatePresence } from "framer-motion";
+import { IconArrow } from "../components/Icons";
+
+import DetailsPage from "./details";
 
 const sampleData = [
   {
@@ -50,6 +51,10 @@ const sampleData = [
 
 export default function Home() {
   const [secondaryVisible, setSecondaryVisible] = useState(false);
+  const detailsVisibility = {
+    visible: secondaryVisible,
+    setVisible: setSecondaryVisible,
+  };
 
   useEffect(() => {
     let data;
@@ -70,21 +75,18 @@ export default function Home() {
             leading={LeadingRoadIcon()}
             trailing={<IconArrow className="icon" />}
             title="Pasand Bagh Road"
-            onClick={() => setSecondaryVisible(true)}
+            onClick={() => detailsVisibility.setVisible(true)}
           >
             <p>Expected Flooding</p>
           </ListItem>
         </BottomSheet>
       </Page>
 
-      <AnimatePresence>
-        {secondaryVisible && (
-          <DetailsPage
-            obj={sampleData}
-            closeFunction={() => setSecondaryVisible(false)}
-          />
-        )}
-      </AnimatePresence>
+      <DetailsPage
+        data={sampleData}
+        title="NH-24 (Kanpur Road)"
+        visibility={detailsVisibility}
+      />
     </>
   );
 }
