@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function BottomSheet({ children, title }) {
   const containerEffects =
@@ -8,7 +8,23 @@ export default function BottomSheet({ children, title }) {
   const containerAlignments =
     " absolute bottom-0 flex flex-col w-screen gap-4 p-6 almostlg:transition-all lg:transition-all lg:w-96 lg:mx-6";
 
-  const [top, setTop] = useState((window.innerHeight * 2) / 3);
+  const [top, setTop] = useState(0);
+  const [hidden, setHidden] = useState(true);
+
+  let dragging = false;
+  let setDragging = (val) => (dragging = val);
+
+  var defaultHeight = true;
+
+  useEffect(() => {
+    setTop((window.innerHeight * 2) / 3);
+    setHidden(false);
+    window.onresize = (e) => {
+      if (defaultHeight) {
+        setTop((window.innerHeight * 2) / 3);
+      }
+    };
+  }, []);
 
   return (
     <div
