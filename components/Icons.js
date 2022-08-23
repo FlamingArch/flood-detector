@@ -107,3 +107,23 @@ export function IconBack({ className }) {
     </svg>
   );
 }
+
+export function IconMapPin({ className }) {
+  return (
+    <svg
+      className={className}
+      width="24"
+      height="34"
+      viewBox="0 0 24 34"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 0C18.62 0 24 5.38 24 12C24 21 12 34 12 34C12 34 0 21 0 12C0 5.38 5.38 0 12 0ZM5 13C5 9.15 8.02586 6 11.7241 6C15.4224 6 18.4483 9.15 18.4483 13C18.4483 16.85 15.4224 20 11.7241 20C8.02586 20 5 16.85 5 13ZM12.2525 14.5V9H11.1958V14.5H12.2525ZM11.0037 16.75C11.0037 17.15 11.3399 17.5 11.7241 17.5C12.1084 17.5 12.4446 17.15 12.4446 16.75C12.4446 16.35 12.1084 16 11.7241 16C11.3399 16 11.0037 16.35 11.0037 16.75Z"
+        fill="white"
+      />
+    </svg>
+  );
+}

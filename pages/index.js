@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import axios from "axios";
 
 import {
@@ -55,8 +54,32 @@ export default function Home() {
     visible: secondaryVisible,
     setVisible: setSecondaryVisible,
   };
+  const [centerCoordinates, setCenterCoordinates] = useState({
+    lat: 28.6077159025,
+    lng: 77.224249103,
+  });
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(function (result) {
+          if (result.state === "granted") {
+            console.log(result.state);
+            //If granted then you can directly call your function here
+          } else if (result.state === "prompt") {
+            console.log(result.state);
+          } else if (result.state === "denied") {
+            //If denied then you have to show instructions to enable location
+          }
+          result.onchange = function () {
+            console.log(result.state);
+          };
+        });
+    } else {
+      alert("Sorry Not available!");
+    }
+
     let data;
     axios
       .get("")
@@ -69,7 +92,7 @@ export default function Home() {
   return (
     <>
       <Page head={<AppHead />} topbar={<AppTopBar />}>
-        <Map />
+        <Map center={centerCoordinates} />
         <BottomSheet title="Risky Roads Nearby">
           <ListItem
             leading={LeadingRoadIcon()}
