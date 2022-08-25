@@ -1,11 +1,14 @@
 import Image from "next/image";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useTheme } from "./hooks";
+import { useContext } from "react";
+import { AppContext } from "../pages/context";
 
 const devMode = false;
 const betterVisibility = false;
 
-export default function Map({ center, markers }) {
+export default function Map({ markers }) {
+  const { currentLocation: center } = useContext(AppContext);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: devMode
       ? null

@@ -4,6 +4,7 @@ import {
   BottomSheet,
   ListItem,
   LeadingRoadIcon,
+  Button,
 } from "../components";
 import { IconArrow } from "../components/Icons";
 import { AppContext } from "./context";
@@ -20,6 +21,7 @@ export default function MainPage() {
     fetchLocation();
     fetchData();
   }, []);
+
   return (
     <>
       <Page head={<AppHead />} topbar={<AppTopBar />}>
