@@ -4,10 +4,14 @@ export default function ListItem({
   children,
   title,
   onClick,
+  className,
 }) {
   return (
     <div
-      className="flex flex-row gap-4 p-4 bg-white rounded-lg shadow-xl cursor-pointer dark:bg-black"
+      className={
+        "flex flex-row gap-4 p-4 bg-white rounded-lg shadow-xl cursor-pointer dark:bg-black " +
+        className
+      }
       onClick={onClick}
     >
       {leading}
