@@ -12,6 +12,7 @@ import { AppHead, AppTopBar } from "../components/fragments";
 import { IconArrow } from "../components/Icons";
 
 import DetailsPage from "./details";
+import { useGeolocated } from "react-geolocated";
 
 const sampleData = {
   size: 2,
@@ -43,6 +44,12 @@ const sampleData = {
   ],
 };
 export default function Home() {
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    useGeolocated({
+      positionOptions: { enableHighAccuracy: true },
+      userDecisionTimeout: 12000,
+    });
+
   const [data, setData] = useState(sampleData);
 
   useEffect(() => {
@@ -60,25 +67,22 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // if (navigator.geolocation) {
-    //   navigator.permissions
-    //     .query({ name: "geolocation" })
-    //     .then(function (result) {
-    //       if (result.state === "granted") {
-    //         console.log(result.state);
-    //         //If granted then you can directly call your function here
-    //       } else if (result.state === "prompt") {
-    //         console.log(result.state);
-    //       } else if (result.state === "denied") {
-    //         //If denied then you have to show instructions to enable location
-    //       }
-    //       result.onchange = function () {
-    //         console.log(result.state);
-    //       };
-    //     });
-    // } else {
-    //   alert("Sorry Not available!");
-    // }
+    console.log("Geolocating...");
+
+    if (isGeolocationAvailable) {
+      console.log("Geolocation available");
+    }
+
+    if (isGeolocationEnabled) {
+      console.log("Geolocation enabled");
+    }
+    if (coords) {
+      console.log(`Current Location: ${coords.latitude}, ${coords.longitude}`);
+      setCenterCoordinates({
+        lat: coords.latitude,
+        lng: coords.longitude,
+      });
+    }
     axios
       .get("localhost:3000/api/sample")
       .then((e) => {
