@@ -26,6 +26,7 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     debugPrint(`Location Changed: ${JSON.stringify(location)}`);
     reverseGeocode(location.lat, location.lng, (s) => setLocationName(s));
+    fetchData();
   }, [location]);
 
   const fetchLocation = () => {
