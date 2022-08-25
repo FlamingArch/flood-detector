@@ -13,42 +13,42 @@ import { IconArrow } from "../components/Icons";
 
 import DetailsPage from "./details";
 
-const sampleData = [
-  {
-    label: "Flood Chances",
-    value: "Yes",
-  },
-  {
-    label: "Latitude",
-    value: "23.21213",
-  },
-  {
-    label: "Longitude",
-    value: "32.21213",
-  },
-  {
-    label: "Sea Level",
-    value: "546 Meters",
-  },
-  {
-    label: "Temperature",
-    value: "40.5 ºC",
-  },
-  {
-    label: "Humidity",
-    value: "23.32%",
-  },
-  {
-    label: "Weather Conditions",
-    value: "Cloudy / Drizzling",
-  },
-  {
-    label: "Pressure",
-    value: "21.2432",
-  },
-];
-
+const sampleData = {
+  size: 2,
+  data: [
+    {
+      latitude: -80,
+      longitude: 44,
+      class: "flood",
+      temp: 20,
+      river: 10,
+      elevation: 200,
+      weather: "clear sky",
+      humidity: 50,
+      cloud: 40,
+      wind: 5,
+    },
+    {
+      latitude: 44,
+      longitude: -80,
+      class: "normal",
+      temp: 20,
+      river: 10,
+      elevation: 200,
+      weather: "clear sky",
+      humidity: 50,
+      cloud: 40,
+      wind: 5,
+    },
+  ],
+};
 export default function Home() {
+  const [data, setData] = useState(sampleData);
+
+  useEffect(() => {
+    console.log(`Data Changed: ${data}`);
+  }, [data]);
+
   const [secondaryVisible, setSecondaryVisible] = useState(false);
   const detailsVisibility = {
     visible: secondaryVisible,
@@ -60,31 +60,29 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.permissions
-        .query({ name: "geolocation" })
-        .then(function (result) {
-          if (result.state === "granted") {
-            console.log(result.state);
-            //If granted then you can directly call your function here
-          } else if (result.state === "prompt") {
-            console.log(result.state);
-          } else if (result.state === "denied") {
-            //If denied then you have to show instructions to enable location
-          }
-          result.onchange = function () {
-            console.log(result.state);
-          };
-        });
-    } else {
-      alert("Sorry Not available!");
-    }
-
-    let data;
+    // if (navigator.geolocation) {
+    //   navigator.permissions
+    //     .query({ name: "geolocation" })
+    //     .then(function (result) {
+    //       if (result.state === "granted") {
+    //         console.log(result.state);
+    //         //If granted then you can directly call your function here
+    //       } else if (result.state === "prompt") {
+    //         console.log(result.state);
+    //       } else if (result.state === "denied") {
+    //         //If denied then you have to show instructions to enable location
+    //       }
+    //       result.onchange = function () {
+    //         console.log(result.state);
+    //       };
+    //     });
+    // } else {
+    //   alert("Sorry Not available!");
+    // }
     axios
-      .get("")
+      .get("localhost:3000/api/sample")
       .then((e) => {
-        data = e;
+        setData(e.data);
       })
       .catch((e) => {});
   }, []);
@@ -106,7 +104,7 @@ export default function Home() {
       </Page>
 
       <DetailsPage
-        data={sampleData}
+        data={data.data[0]}
         title="NH-24 (Kanpur Road)"
         visibility={detailsVisibility}
       />
