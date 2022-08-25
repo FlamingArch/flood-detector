@@ -3,21 +3,26 @@ import { IconBack, IconCompass } from "../components/Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import _ from "lodash";
+import { AppContext } from "./context";
 import { GridView } from "../components";
 import GridTile from "../components/GridTile";
 import Styles from "../components/Styles";
+import { useContext } from "react";
 
-export default function DetailsPage({ title, data, visibility }) {
+export default function DetailsPage() {
+  const { detailsPage } = useContext(AppContext);
+  const { data, visibility } = detailsPage;
+
   return (
     <AnimatePresence>
       {visibility.visible && (
-        <DetailsPageContent title={title} data={data} visibility={visibility} />
+        <DetailsPageContent data={data} visibility={visibility} />
       )}
     </AnimatePresence>
   );
 }
 
-function DetailsPageContent({ title, data, visibility }) {
+function DetailsPageContent({ data, visibility }) {
   const [xWidth, setXWidth] = useState(
     window.innerWidth > 1024 ? 384 : window.innerWidth
   );
@@ -25,8 +30,6 @@ function DetailsPageContent({ title, data, visibility }) {
   window.onresize = () => {
     setXWidth(window.innerWidth > 1024 ? 384 : window.innerWidth);
   };
-
-  let obj = data ?? [];
 
   const styles = Styles.details;
   return (
@@ -38,7 +41,7 @@ function DetailsPageContent({ title, data, visibility }) {
       className={styles.page}
     >
       <TopBar
-        title={title}
+        title={data.title || "Unnamed Road"}
         leading={
           visibility.setVisible && (
             <Button
@@ -51,21 +54,25 @@ function DetailsPageContent({ title, data, visibility }) {
         }
       />
       <GridView>
-        {Object.keys(obj).map((e, i) => (
-          <GridTile
-            key={i}
-            contentStyles={styles.valueStyles}
-            trailingStyles={styles.labelStyles}
-            leadingStyles={styles.labelStyles}
-            trailing={
-              <>
-                <IconCompass className="icon" /> {_.capitalize(e)}
-              </>
-            }
-          >
-            {obj[e]}
-          </GridTile>
-        ))}
+        {Object.keys(data).map((e, i) => {
+          if (e == "title") return null;
+
+          return (
+            <GridTile
+              key={i}
+              contentStyles={styles.valueStyles}
+              trailingStyles={styles.labelStyles}
+              leadingStyles={styles.labelStyles}
+              trailing={
+                <>
+                  <IconCompass className="icon" /> {_.capitalize(e)}
+                </>
+              }
+            >
+              {data[e]}
+            </GridTile>
+          );
+        })}
       </GridView>
     </motion.div>
   );
