@@ -11,6 +11,7 @@ export default function BottomSheet({ children, title }) {
   const [top, setTop] = useState(1000);
   const [hidden, setHidden] = useState(true);
   const [window, setWindow] = useState({ innerHeight: 100 });
+  const [previousHeight, setPreviousHeight] = useState(null);
 
   let dragging = false;
   let setDragging = (val) => (dragging = val);
@@ -40,6 +41,15 @@ export default function BottomSheet({ children, title }) {
       <div
         style={{ height: "2px" }}
         className="w-6 transition-opacity duration-200 bg-black rounded-full dark:bg-white hover:bg-opacity-80 place-self-center"
+        onClick={() => {
+          if (previousHeight == null) {
+            setPreviousHeight(top);
+            setTop(128);
+          } else {
+            setTop(previousHeight);
+            setPreviousHeight(null);
+          }
+        }}
       ></div>
 
       <h1 style={{ fontSize: "1.2rem" }} className="font-light">
