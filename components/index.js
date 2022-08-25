@@ -6,3 +6,4 @@ export { default as Map } from "./Map";
 export { default as Page } from "./Page";
 export { default as TopBar } from "./TopBar";
 export { default as GridView } from "./GridView";
+export { default as DragHandle } from "./DragHandle";

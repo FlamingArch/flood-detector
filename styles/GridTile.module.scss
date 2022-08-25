@@ -1,0 +1,17 @@
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  @apply bg-white bg-opacity-80;
+}
+.dark {
+  @apply bg-gray-700 dark:bg-opacity-80 text-black dark:text-white shadow-lg hover:shadow-2xl transition-shadow rounded-2xl aspect-square;
+}
+.leading {
+  @apply flex flex-row w-full;
+}
+.trailing {
+  @apply flex flex-row w-full;
+}
+.content {
+  @apply flex flex-col p-4 w-auto;
+}

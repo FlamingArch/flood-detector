@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import Styles from "./Styles";
+import styles from "../styles/BottomSheet.module.scss";
+import { DragHandle } from ".";
 
 export default function BottomSheet({ children, title }) {
   const [top, setTop] = useState(1000);
@@ -15,6 +16,12 @@ export default function BottomSheet({ children, title }) {
     };
   }, [defaultHeight]);
 
+  const getTop = (top, { innerHeight }) => {
+    return {
+      top: `${top > innerHeight * 0.1 ? top : innerHeight * 0.1 ?? 128}px`,
+    };
+  };
+
   const expandSheet = () => {
     if (lastHeight == null) {
       setLastHeight(top);
@@ -25,20 +32,13 @@ export default function BottomSheet({ children, title }) {
     }
   };
 
-  const { alignments, effects, styles, getTop } = Styles.bottomSheet;
   return (
-    <div className={alignments + effects + styles} style={getTop(top, window)}>
-      <DragHandle onClick={expandSheet}></DragHandle>
+    <div className={styles.sheet} style={getTop(top, window)}>
+      <DragHandle onClick={expandSheet} />
       <SheetHeading title={title} />
-      {children}
+      <div className="flex flex-col gap-4 p-6 overflow-scroll">{children}</div>
     </div>
   );
 }
 
-const DragHandle = ({ onClick }) => (
-  <div className={Styles.dragHandle} onClick={onClick}></div>
-);
-
-const SheetHeading = ({ title }) => (
-  <h1 style={Styles.bottomSheet.heading}>{title}</h1>
-);
+const SheetHeading = ({ title }) => <h1 className={styles.heading}>{title}</h1>;

@@ -5,7 +5,7 @@ import { useTheme } from "./hooks";
 const devMode = false;
 const betterVisibility = false;
 
-export default function Map({ center }) {
+export default function Map({ center, markers }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: devMode
       ? null
@@ -45,6 +45,7 @@ export default function Map({ center }) {
       mapContainerStyle={{}}
     >
       <MarkerF position={center} />
+      {markers && markers.map((e, i) => <MarkerF key={i} position={e} />)}
     </GoogleMap>
   );
 }

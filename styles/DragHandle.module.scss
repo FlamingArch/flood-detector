@@ -1,0 +1,7 @@
+.container {
+  @apply grid place-content-center p-5 cursor-ns-resize;
+}
+
+.handle {
+  @apply w-6 transition-opacity duration-200 bg-black rounded-full dark:bg-white hover:bg-opacity-80 place-self-center h-[2px];
+}

@@ -1,7 +1,6 @@
-.button {
-  .svg {
-    fill: var(--foreground);
-    stroke: var(--foreground);
-    color: var(--foreground);
-  }
+.translucent {
+  @apply bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60 backdrop-filter backdrop-blur-lg transition-all shadow-lg hover:shadow-xl;
+}
+.transparent {
+  @apply hover:bg-white hover:dark:bg-black hover:bg-opacity-60 hover:dark:bg-opacity-60 hover:backdrop-filter hover:backdrop-blur-lg transition-all hover:shadow-xl;
 }
