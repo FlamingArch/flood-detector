@@ -8,7 +8,7 @@ const devMode = false;
 const betterVisibility = false;
 
 export default function Map({ markers }) {
-  const { currentLocation: center } = useContext(AppContext);
+  const { location: center } = useContext(AppContext);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: devMode
       ? null

@@ -3,8 +3,10 @@ import axios from "axios";
 export const constants = {
   debug: true,
   debugMap: false,
-  apiUrl: "https://reqres.in/api/users",
+  apiUrl: "https://sea-lion-app-kps86.ondigitalocean.app/",
+  alwaysUseFallbackData: false,
   updateData: false,
+  invalidateOldDataOnRefetch: true,
   fallbackLocation: {
     lat: 22.636295309999994,
     lng: 75.85173033999997,
@@ -61,9 +63,9 @@ export const geocode = (location, callback) => {
   location = location.replace(" ", ",");
   var url = `${constants.openWeatherMapEndpoint}direct?q=${location}&limit=5&appid=${process.env.NEXT_PUBLIC_OPENWEATHERMAP_APIKEY}`;
   if (location === "" && location == undefined) return;
-  debugPrint(`GEOCODE: ${location}`);
+  debugPrint(`geocode: ${location}`);
   httpGet(url, (e) => {
-    debugPrint(`GEOCODE: ${location} ${e}`);
+    debugPrint(`geocode: ${location} ${e}`);
     callback({ lat: e.data[0].lat, lng: e.data[0].lon });
   });
 };

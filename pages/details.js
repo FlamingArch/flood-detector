@@ -10,8 +10,16 @@ import Styles from "../components/Styles";
 import { useContext } from "react";
 
 export default function DetailsPage() {
-  const { detailsPage } = useContext(AppContext);
-  const { data, visibility } = detailsPage;
+  const {
+    detailsVisibility,
+    setDetailsVisibility,
+    detailsData: data,
+  } = useContext(AppContext);
+
+  const visibility = {
+    visible: detailsVisibility,
+    setVisible: setDetailsVisibility,
+  };
 
   return (
     <AnimatePresence>

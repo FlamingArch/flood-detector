@@ -15,7 +15,7 @@ describe("Helper Functions", () => {
     httpPost(
       "https://reqres.in/api/users",
       { latitude: 22.636295309999994, longitude: 75.85173033999997 },
-      (res) => (data = JSON.stringify(res.data))
+      (res) => (data = JSON.stringify(res))
     );
     expect(data).toBe(
       JSON.stringify({

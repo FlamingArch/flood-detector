@@ -12,13 +12,9 @@ import {
 import { AppContext } from "../../pages/context";
 export default function AppTopBar() {
   const [searchVisible, setSearchVisible] = useState(false);
-  const {
-    searchTerm,
-    setSearchTerm,
-    searchLocation,
-    fetchLocation,
-    locationName,
-  } = useContext(AppContext);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { searchLocation, fetchLocation, locationName } =
+    useContext(AppContext);
 
   return (
     <TopBar
@@ -56,9 +52,9 @@ export default function AppTopBar() {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onSubmit={() => searchLocation()}
+              onSubmit={() => searchLocation(searchTerm)}
               onKeyDown={(e) => {
-                e.key == "Enter" && searchLocation();
+                e.key == "Enter" && searchLocation(searchTerm);
               }}
             />
             <Button type="transparent" onClick={() => searchLocation()}>
