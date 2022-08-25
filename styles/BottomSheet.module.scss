@@ -1,7 +1,7 @@
 .sheet {
   @apply backdrop-filter backdrop-blur-xl rounded-t-xl shadow-2xl;
   @apply text-black dark:text-white bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60;
-  @apply absolute bottom-0 flex flex-col w-screen almostlg:transition-all lg:transition-all lg:w-96 lg:mx-6;
+  @apply absolute bottom-0 flex flex-col w-screen almostlg:transition-all lg:transition-all transition-[top] lg:w-96 lg:mx-6;
 }
 
 .heading {

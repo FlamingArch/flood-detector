@@ -32,11 +32,11 @@ export default function DetailsPage() {
 
 function DetailsPageContent({ data, visibility }) {
   const [xWidth, setXWidth] = useState(
-    window.innerWidth > 1024 ? 384 : window.innerWidth
+    window.innerWidth > 1024 ? 480 : window.innerWidth
   );
 
   window.onresize = () => {
-    setXWidth(window.innerWidth > 1024 ? 384 : window.innerWidth);
+    setXWidth(window.innerWidth > 1024 ? 480 : window.innerWidth);
   };
 
   const styles = Styles.details;
@@ -73,11 +73,15 @@ function DetailsPageContent({ data, visibility }) {
               leadingStyles={styles.labelStyles}
               trailing={
                 <>
-                  <IconCompass className="icon" /> {_.capitalize(e)}
+                  <IconCompass className="icon" /> {_.startCase(e)}
                 </>
               }
             >
-              {data[e]}
+              {typeof data[e] == "number" ? (
+                <>{Math.round(data[e])}</>
+              ) : (
+                <>{data[e]}</>
+              )}
             </GridTile>
           );
         })}

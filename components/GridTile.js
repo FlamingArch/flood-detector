@@ -1,5 +1,3 @@
-import Styles from "./Styles";
-
 const GridTile = ({
   children,
   leading,
@@ -15,7 +13,7 @@ const GridTile = ({
       "bg-white bg-opacity-80 dark:bg-gray-700 dark:bg-opacity-80 text-black dark:text-white shadow-lg hover:shadow-2xl transition-shadow rounded-2xl aspect-square",
     leading: "flex flex-row w-full ",
     trailing: "flex flex-row w-full ",
-    content: "flex flex-col p-4 w-auto",
+    content: "flex flex-col p-4 w-auto max-w-[200px] overflow-hidden",
   };
 
   return (
