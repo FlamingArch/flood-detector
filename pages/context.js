@@ -59,8 +59,33 @@ export const AppProvider = ({ children }) => {
 
   //#region HTTP
   const [data, setData] = useState({
-    size: 0,
-    data: [],
+    size: 2,
+    data: [
+      {
+        latitude: 44,
+        longitude: -80,
+        class: "flood",
+        temperature: 20,
+        river: 10,
+        elevation: 200,
+        weather: "clear sky",
+        humidity: 50,
+        cloud: 40,
+        wind: 5,
+      },
+      {
+        latitude: 44,
+        longitude: -80,
+        class: "normal",
+        temp: 20,
+        river: 10,
+        elevation: 200,
+        weather: "clear sky",
+        humidity: 50,
+        cloud: 40,
+        wind: 5,
+      },
+    ],
   });
   const fetchData = () => {
     console.log("context::fetchData");
