@@ -20,7 +20,7 @@ export default function AppTopBar() {
           </Button>
         )
       }
-      title={!searchVisible && "Pasand Bagh, Karim Ganj"}
+      title={!searchVisible && "Bhicholi Hapsi, Indore"}
     >
       {!searchVisible && (
         <Button type="translucent" onClick={() => setSearchVisible(true)}>

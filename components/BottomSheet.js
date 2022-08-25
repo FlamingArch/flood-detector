@@ -1,61 +1,44 @@
 import { useState, useEffect } from "react";
+import Styles from "./Styles";
 
 export default function BottomSheet({ children, title }) {
-  const containerEffects =
-    " backdrop-filter backdrop-blur-xl rounded-t-xl shadow-2xl";
-  const containerStyles =
-    " text-black dark:text-white bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60";
-  const containerAlignments =
-    " absolute bottom-0 flex flex-col w-screen gap-4 p-6 almostlg:transition-all lg:transition-all lg:w-96 lg:mx-6";
-
   const [top, setTop] = useState(1000);
-  const [hidden, setHidden] = useState(true);
   const [window, setWindow] = useState({ innerHeight: 100 });
-  const [previousHeight, setPreviousHeight] = useState(null);
-
-  let dragging = false;
-  let setDragging = (val) => (dragging = val);
-
+  const [lastHeight, setLastHeight] = useState(null);
   var defaultHeight = true;
 
   useEffect(() => {
     setWindow(global.window);
     setTop((global.window.innerHeight * 2) / 3);
-    setHidden(false);
-    global.window.onresize = (e) => {
-      if (defaultHeight) {
-        setTop((global.window.innerHeight * 2) / 3);
-      }
+    global.window.onresize = () => {
+      if (defaultHeight) setTop((global.window.innerHeight * 2) / 3);
     };
   }, [defaultHeight]);
 
-  return (
-    <div
-      className={containerAlignments + containerEffects + containerStyles}
-      style={{
-        top: `${
-          top > window.innerHeight * 0.1 ? top : window.innerHeight * 0.1 ?? 128
-        }px`,
-      }}
-    >
-      <div
-        style={{ height: "2px" }}
-        className="w-6 transition-opacity duration-200 bg-black rounded-full dark:bg-white hover:bg-opacity-80 place-self-center"
-        onClick={() => {
-          if (previousHeight == null) {
-            setPreviousHeight(top);
-            setTop(128);
-          } else {
-            setTop(previousHeight);
-            setPreviousHeight(null);
-          }
-        }}
-      ></div>
+  const expandSheet = () => {
+    if (lastHeight == null) {
+      setLastHeight(top);
+      setTop(128);
+    } else {
+      setTop(lastHeight);
+      setLastHeight(null);
+    }
+  };
 
-      <h1 style={{ fontSize: "1.2rem" }} className="font-light">
-        {title}
-      </h1>
+  const { alignments, effects, styles, getTop } = Styles.bottomSheet;
+  return (
+    <div className={alignments + effects + styles} style={getTop(top, window)}>
+      <DragHandle onClick={expandSheet}></DragHandle>
+      <SheetHeading title={title} />
       {children}
     </div>
   );
 }
+
+const DragHandle = ({ onClick }) => (
+  <div className={Styles.dragHandle} onClick={onClick}></div>
+);
+
+const SheetHeading = ({ title }) => (
+  <h1 style={Styles.bottomSheet.heading}>{title}</h1>
+);
