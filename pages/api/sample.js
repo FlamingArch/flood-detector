@@ -8,7 +8,7 @@ export default function handler(req, res) {
         latitude: 44,
         longitude: -80,
         class: "flood",
-        temp: 20,
+        temperature: 20,
         river: 10,
         elevation: 200,
         weather: "clear sky",

@@ -21,7 +21,7 @@ const sampleData = {
       latitude: -80,
       longitude: 44,
       class: "flood",
-      temp: 20,
+      temperature: 20,
       river: 10,
       elevation: 200,
       weather: "clear sky",
@@ -62,8 +62,8 @@ export default function Home() {
     setVisible: setSecondaryVisible,
   };
   const [centerCoordinates, setCenterCoordinates] = useState({
-    lat: 28.6077159025,
-    lng: 77.224249103,
+    lat: 22.636295309999994,
+    lng: 75.85173033999997,
   });
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function Home() {
           <ListItem
             leading={LeadingRoadIcon()}
             trailing={<IconArrow className="icon" />}
-            title="Pasand Bagh Road"
+            title="National Highway 47"
             onClick={() => detailsVisibility.setVisible(true)}
           >
             <p>Expected Flooding</p>
@@ -109,7 +109,7 @@ export default function Home() {
 
       <DetailsPage
         data={data.data[0]}
-        title="NH-24 (Kanpur Road)"
+        title="National Highway 47"
         visibility={detailsVisibility}
       />
     </>
