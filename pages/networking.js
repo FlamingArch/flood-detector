@@ -13,6 +13,13 @@ export const httpPost = (url, data, success, failure) => {
         lng: 75.85173033999997,
       }
     )
-    .then(success || ((e) => console.log(e)))
-    .catch(failure || ((e) => console.log("NETWORK ERROR: ", e)));
+    .then((e) => {
+      console.log(`HTTPPOST::response => ${JSON.stringify(e)}`);
+      success && success(e);
+    })
+
+    .catch((e) => {
+      console.log(`HTTPPOST::error => ${JSON.stringify(e)}`);
+      failure && failure(e);
+    });
 };

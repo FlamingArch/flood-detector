@@ -2,6 +2,9 @@ import { useGeolocated } from "react-geolocated";
 import { createContext, useState, useEffect } from "react";
 import { httpGet, httpPost } from "./networking";
 
+const url = "https://reqres.in/api/users";
+const updateData = false;
+
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -33,7 +36,7 @@ export const AppProvider = ({ children }) => {
     }, 200);
   };
 
-  useEffect(() => {
+  const reverseGeocode = () => {
     var base_url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${currentLocation.lat}&lon=${currentLocation.lng}&limit=5`;
     var api_key = `&appid=${process.env.NEXT_PUBLIC_OPENWEATHERMAP_APIKEY}`;
     var url = `${base_url}${api_key}`;
@@ -45,6 +48,11 @@ export const AppProvider = ({ children }) => {
       );
       console.log(currentLocation);
     });
+  };
+
+  useEffect(() => {
+    reverseGeocode();
+    fetchData();
   }, [currentLocation]);
 
   //#endregion
@@ -56,13 +64,16 @@ export const AppProvider = ({ children }) => {
   });
   const fetchData = () => {
     console.log("context::fetchData");
-    httpGet(
-      "http://localhost:3000/api/sample",
-      (e) => {
-        console.log(`Fetched Data: ${JSON.stringify(e.data)}`);
-        setData(e.data);
+    httpPost(
+      url,
+      {
+        lat: currentLocation.lat,
+        lng: currentLocation.lng,
       },
-      () => console.log("Fetch Data Error")
+      (e) => {
+        console.log(e.data);
+        updateData && setData(e.data);
+      }
     );
   };
 
