@@ -1,8 +1,6 @@
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import Image from "next/image";
-import { useMemo } from "react";
+import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useTheme } from "./hooks";
-import { IconMapPin } from "./Icons";
 
 const devMode = false;
 const betterVisibility = false;
@@ -36,6 +34,9 @@ export default function Map({ center }) {
     <GoogleMap
       zoom={12}
       center={center}
+      options={{
+        disableDefaultUI: true,
+      }}
       mapContainerClassName={
         "w-screen h-screen dark:-hue-rotate-[180deg] dark:invert " +
         (devMode ? "brightness-200 contrast-200" : "") +
