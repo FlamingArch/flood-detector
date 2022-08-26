@@ -65,8 +65,8 @@ function DetailsPageContent({ data, visibility }) {
         leading={
           _.lowerCase(data["class"]) == "flood" && (
             <div className="flex flex-col items-center justify-center gap-4 p-12 m-5 mb-5 text-3xl text-center text-white bg-red-500 shadow-2xl aspect-square rounded-xl">
-              <div className="w-1/2 text-6xl border-2 border-white rounded-full">
-                !
+              <div className="px-8 py-2 text-3xl text-red-700 bg-white border-2 border-white rounded-full w-fit">
+                ALERT
               </div>
               Flood Expected
             </div>

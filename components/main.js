@@ -1,8 +1,10 @@
 import { useContext, useEffect } from "react";
 import { Map, Page, BottomSheet, ListItem, LeadingRoadIcon, Button } from ".";
-import { IconArrow } from "./Icons";
+import { IconArrow, IconGoogle } from "./Icons";
 import { AppContext } from "./context";
 import DetailsPage from "./details";
+import Image from "next/image";
+import logo from "../public/logo.webp";
 
 import { AppHead, AppTopBar } from "./fragments";
 import { FirebaseContext } from "./fireabase";
@@ -47,7 +49,7 @@ const Dashboard = () => {
                 onClick={() => showDetails(e)}
               >
                 {e.class == "flood" ? (
-                  <p>Expected Flooding</p>
+                  <p className="text-red-700">Expected Flooding</p>
                 ) : (
                   <p>Road Clear</p>
                 )}
@@ -66,14 +68,27 @@ const Dashboard = () => {
 
 export const SignInPage = ({ func }) => (
   <Page head={<AppHead />}>
-    <Map load={false} />
-    <div className="absolute top-0 left-0 grid w-screen h-screen gap-4 bg-white bg-opacity-0 place-content-center backdrop-blur-xl dark:bg-black dark:bg-opacity-0">
-      <p className="text-3xl font-thin text-black dark:text-white">
-        Not Signed In
-      </p>
-      <Button type="translucent" onClick={func}>
-        Sign In
-      </Button>
+    <Image
+      src={
+        "https://unsplash.com/photos/nrnd1-fTsdQ/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjYxNTExMjg5&force=true"
+      }
+      layout="fill"
+      alt=""
+      className="object-cover position-center -z-10"
+    />
+    <div className="grid w-screen h-screen place-content-center">
+      <div className="grid gap-4 p-12 bg-white rounded-2xl bg-opacity-60 place-content-center backdrop-blur-xl dark:bg-black dark:bg-opacity-60">
+        <Image layout="responsive" alt="" src={logo} />
+        <p className="text-xl text-center text-black font-regular dark:text-white">
+          Not Signed In
+        </p>
+        <Button type="translucent" onClick={func}>
+          <div className="flex items-center w-full gap-6 mx-2 space-between">
+            <IconGoogle className="icon" /> Sign In with Google{" "}
+            <div className=""></div>
+          </div>
+        </Button>
+      </div>
     </div>
   </Page>
 );
