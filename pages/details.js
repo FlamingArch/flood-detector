@@ -1,5 +1,5 @@
-import { TopBar, Button } from "../components";
-import { IconBack, IconCompass } from "../components/Icons";
+import { TopBar, Button, ListItem } from "../components";
+import { Icon, IconBack, IconCompass, iconData } from "../components/Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import _ from "lodash";
@@ -73,7 +73,7 @@ function DetailsPageContent({ data, visibility }) {
               leadingStyles={styles.labelStyles}
               trailing={
                 <>
-                  <IconCompass className="icon" /> {_.startCase(e)}
+                  <Icon data={iconData[e]} className="icon" /> {_.startCase(e)}
                 </>
               }
             >
