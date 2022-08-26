@@ -39,6 +39,7 @@ export const constants = {
         wind: 5,
       },
     ],
+    blockage: [],
   },
   useGeolocatedOptions: {
     positionOptions: { enableHighAccuracy: true },

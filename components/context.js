@@ -48,7 +48,8 @@ export const AppProvider = ({ children }) => {
   };
 
   const fetchData = () => {
-    constants.invalidateOldDataOnRefetch && setData({ size: 0, data: [] });
+    constants.invalidateOldDataOnRefetch &&
+      setData({ size: 0, data: [], blockage: [] });
     httpPost(
       constants.alwaysUseFallbackData
         ? "https://reqres.in/api/users"
