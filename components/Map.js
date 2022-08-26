@@ -2,12 +2,15 @@ import Image from "next/image";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useTheme } from "./hooks";
 import { useContext } from "react";
-import { AppContext } from "../pages/context";
+import { AppContext } from "./context";
+
+import lightMap from "../public/Map.light.webp";
+import darkMap from "../public/Map.dark.webp";
 
 const devMode = false;
 const betterVisibility = false;
 
-export default function Map({ markers }) {
+export default function Map({ markers, load }) {
   const { location: center } = useContext(AppContext);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: devMode
@@ -15,19 +18,19 @@ export default function Map({ markers }) {
       : process.env.NEXT_PUBLIC_GOOGLE_MAPS_APIKEY,
   });
 
-  const { themeName: theme } = useTheme();
-  if (!isLoaded)
+  const { themeName: theme, isDarkMode } = useTheme();
+  if (!isLoaded || load == false)
     return (
       <>
         <Image
-          src={`/../public/Map.${theme}.webp`}
+          src={isDarkMode ? darkMap : lightMap}
           className="object-cover -z-50"
           layout="fill"
           alt=""
         />
         <div className="flex mt-[30vh] place-content-center">
           <div className="flex p-12 text-2xl bg-white rounded-lg place-items-center aspect-square backdrop-filter backdrop-blur-xl dark:bg-black bg-opacity:60 dark:bg-opacity-80">
-            <div className="opacity-80">Loading</div>
+            <div className="text-black opacity-80 dark:text-white">Loading</div>
           </div>
         </div>
       </>

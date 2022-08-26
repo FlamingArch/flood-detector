@@ -1,12 +1,12 @@
-import { TopBar, Button } from "../components";
-import { Icon, IconBack, IconCompass, iconData } from "../components/Icons";
+import { TopBar, Button } from ".";
+import { Icon, IconBack, IconCompass, iconData } from "./Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import _ from "lodash";
 import { AppContext } from "./context";
-import { GridView } from "../components";
-import GridTile from "../components/GridTile";
-import Styles from "../components/Styles";
+import { GridView } from ".";
+import GridTile from "./GridTile";
+import Styles from "./Styles";
 import { useContext } from "react";
 
 export default function DetailsPage() {

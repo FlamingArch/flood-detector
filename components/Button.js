@@ -7,7 +7,7 @@ export default function Button({ type, children, onClick }) {
       style={{ borderRadius: "10px" }}
       className={styles[type]}
     >
-      <div className="p-4 transition-all duration-400 hover:opacity-60 dark:hover:opacity-60">
+      <div className="p-4 text-black transition-all duration-400 hover:opacity-60 dark:hover:opacity-60 dark:text-white">
         {children}
       </div>
     </button>

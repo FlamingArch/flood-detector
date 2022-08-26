@@ -9,12 +9,14 @@ import {
   IconBack,
   IconSearch,
 } from "../Icons";
-import { AppContext } from "../../pages/context";
+import { AppContext } from "../context";
+import { FirebaseContext } from "../fireabase";
 export default function AppTopBar() {
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { searchLocation, fetchLocation, locationName } =
     useContext(AppContext);
+  const { signOut } = useContext(FirebaseContext);
 
   return (
     <TopBar
@@ -24,7 +26,7 @@ export default function AppTopBar() {
             <IconBack className="icon" />
           </Button>
         ) : (
-          <Button type="transparent">
+          <Button type="transparent" onClick={signOut}>
             <IconMenu className="icon" />
           </Button>
         )

@@ -1,12 +1,14 @@
-import MainPage from "./main";
-import { AppContext, AppProvider } from "./context";
-import { useContext, useEffect } from "react";
+import MainPage from "../components/main";
+import { AppProvider } from "../components/context";
+import { FirebaseProvider } from "../components/fireabase";
 
 export default function Home() {
   return (
-    // <h1>{val}</h1>
+    // <h2>sup</h2>
     <AppProvider>
-      <MainPage />
+      <FirebaseProvider>
+        <MainPage />
+      </FirebaseProvider>
     </AppProvider>
   );
 }
