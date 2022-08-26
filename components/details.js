@@ -61,9 +61,22 @@ function DetailsPageContent({ data, visibility }) {
           )
         }
       />
-      <GridView>
+      <GridView
+        leading={
+          _.lowerCase(data["class"]) == "flood" && (
+            <div className="flex flex-col items-center justify-center gap-4 p-12 m-5 mb-5 text-3xl text-center text-white bg-red-500 shadow-2xl aspect-square rounded-xl">
+              <div className="w-1/2 text-6xl border-2 border-white rounded-full">
+                !
+              </div>
+              Flood Expected
+            </div>
+          )
+        }
+      >
         {Object.keys(data).map((e, i) => {
           if (e == "title") return null;
+          if (e == "allow") return null;
+          if (e == "class") return null;
 
           return (
             <GridTile
