@@ -79,3 +79,9 @@ export const reverseGeocode = (lat, lng, callback) => {
     callback(location);
   });
 };
+
+export const getCoordinatesFromString = (str) => {
+  str = str.replace(/[( )]/g, "");
+  str = str.split(",");
+  return { lat: Number.parseFloat(str[0]), lng: Number.parseFloat(str[1]) };
+};

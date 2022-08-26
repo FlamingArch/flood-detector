@@ -4,6 +4,7 @@ import {
   constants,
   debugPrint,
   geocode,
+  getCoordinatesFromString,
   httpPost,
   reverseGeocode,
 } from "./helpers";
@@ -65,6 +66,10 @@ export const AppProvider = ({ children }) => {
 
   const searchLocation = (name) => {
     if (name == "") return;
+    if (name[0] == "(" || name[0].match(/[0-9]/)) {
+      setLocation(getCoordinatesFromString(name));
+      return;
+    }
     geocode(name, (e) => setLocation(e));
   };
 

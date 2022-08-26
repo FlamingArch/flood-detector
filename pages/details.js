@@ -1,4 +1,4 @@
-import { TopBar, Button, ListItem } from "../components";
+import { TopBar, Button } from "../components";
 import { Icon, IconBack, IconCompass, iconData } from "../components/Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
