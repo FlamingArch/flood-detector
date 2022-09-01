@@ -37,6 +37,7 @@ const Dashboard = () => {
   return (
     <Page head={<AppHead />} topbar={<AppTopBar />}>
       <Map center={currentLocation} />
+      <legend />
       <BottomSheet title="Roads Nearby">
         {data.data.length > 0 ? (
           data.data.map((e, i) => {
@@ -70,13 +71,13 @@ export const SignInPage = ({ func }) => (
   <Page head={<AppHead />}>
     <Image
       src={
-        "https://unsplash.com/photos/nrnd1-fTsdQ/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjYxNTExMjg5&force=true"
+        "https://unsplash.com/photos/nrnd1-fTsdQ/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjYxNTExMjg5&force=true&w=2400"
       }
       layout="fill"
       alt=""
       className="object-cover position-center -z-10"
     />
-    <div className="grid w-screen h-screen place-content-center">
+    <div className="grid w-screen h-screen overflow-hidden place-content-center">
       <div className="grid gap-4 p-12 bg-white rounded-2xl bg-opacity-60 place-content-center backdrop-blur-xl dark:bg-black dark:bg-opacity-60">
         <Image layout="responsive" alt="" src={logo} />
         <p className="text-xl text-center text-black font-regular dark:text-white">
@@ -92,3 +93,5 @@ export const SignInPage = ({ func }) => (
     </div>
   </Page>
 );
+
+export const Legand = () => <div className="flex-row flex-gap-2"></div>;
